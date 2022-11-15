@@ -10,10 +10,10 @@ class graph
 {
 private:
 	//maybe a map with name with the val being a pair of its rank & vector of what is linking TO it
-	map<string, pair<float, vector<string>>> website;
+	map<string, pair<double, vector<string>>> website;
 	int size = 0;
 	int p = 0;
-	map<string, int> fromCounter;
+	map<string, double> fromCounter;
 
 public:
 	graph(int Size, int P)
