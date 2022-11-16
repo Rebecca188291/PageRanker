@@ -86,7 +86,7 @@ void graph::updateRank()
 	}
 	for (int i = 0; i < p-1; i++)
 	{
-
+		vector<double> ranks;
 		for (auto &iter : website)
 		{
 			double sum = 0.0;
@@ -94,11 +94,16 @@ void graph::updateRank()
 			for (int j = 0; j < iter.second.second.size(); j++)
 			{
 				string from = iter.second.second[j];
-				sum += 1.0 / fromCounter[from];
+				sum +=  website[from].first * (1.0 / fromCounter[from]);
 			}
-			double currRank = iter.second.first;
-			double result = currRank * sum;
-			iter.second.first = result;
+			ranks.push_back(sum);
+			// iter.second.first = sum;
+		}
+		int counter = 0;
+		for (auto& iter : website)
+		{
+			iter.second.first = ranks[counter];
+			counter++;
 		}
 	}
 

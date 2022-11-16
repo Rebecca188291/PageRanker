@@ -5,22 +5,24 @@ using namespace std;
 
 int main()
 {
-	string numCommands;
-	getline(cin, numCommands);
-	for (int i = 0; i < numCommands.length(); i++)
-	{
+	int numLines, p;
+	string from, to;
+	cin >> numLines;
+	cin >> p;
 
+	cout << "numLines: " << numLines << endl;
+	graph PageRanker(p);
+
+	for (int i = 0; i < numLines; i++)
+	{
+		cin >> from;
+		cin >> to;
+		PageRanker.insert(from, to);
 	}
 
+	//cout << "num Lines: " << numLines << endl;
+	//cout << "p: " << p << endl;
 
-	graph Test(2);
-	Test.insert("google.com", "gmail.com");
-	Test.insert("google.com", "maps.com");
-	Test.insert("facebook.com", "ufl.edu");
-	Test.insert("ufl.edu", "google.com");
-	Test.insert("ufl.edu", "gmail.com");
-	Test.insert("maps.com", "facebook.com");
-	Test.insert("gmail.com", "maps.com");
-	Test.printPR();
+	PageRanker.printPR();
 
 }
