@@ -4,21 +4,17 @@ void graph::insert(string from, string to)
 
 	if (website.find(to) == website.end())
 	{
-		//then it is not in the map
 		vector<string> linkedBy;
 		linkedBy.push_back(from);
 		pair<double, vector<string>> pair1;
-		pair1.first = 1.0/size;
+		pair1.first = 1.0;
 		pair1.second = linkedBy;
 		website[to] = pair1;
 
 		if (website.find(from) == website.end())
 		{
-			vector<string> linkingTo;
-			//nkingTo.push_back(to);
 			pair<double, vector<string>> pair2;
-			pair2.first = 1.0/size;
-			pair2.second = linkingTo;
+			pair2.first = 1.0;
 			website[from] = pair2;
 			fromCounter[from] = 1.0;
 		}
@@ -32,11 +28,8 @@ void graph::insert(string from, string to)
 		website[to].second.push_back(from);
 		if (website.find(from) == website.end())
 		{
-			vector<string> linkingTo;
-			//linkingTo.push_back(to);
 			pair<double, vector<string>> pair2;
-			pair2.first = 1.0/size;
-			pair2.second = linkingTo;
+			pair2.first = 1.0;
 			website[from] = pair2;
 			fromCounter[from] = 1.0;
 		}
@@ -61,12 +54,12 @@ void graph::printPR()
 		pair1.second = iter.second.first;
 		pair1.first = iter.first;
 		finalList.push_back(pair1);
-		cout << iter.first << ": ";
-		for (int j = 0; j < iter.second.second.size(); j++)
-		{
-			cout << iter.second.second[j]<< " ";
-		}
-		cout << endl;
+		//cout << iter.first << ": ";
+		//for (int j = 0; j < iter.second.second.size(); j++)
+		//{
+		//	cout << iter.second.second[j]<< " ";
+		//}
+		//cout << endl;
 	}
 	sort(finalList.begin(), finalList.end()); //sorts based on the name
 	for (int i = 0; i < finalList.size(); i++)
@@ -83,12 +76,13 @@ void graph::printPR()
 void graph::updateRank()
 {
 	//add any websites that point to nothing
-	for (auto iter : website)
+	for (auto &iter : website)
 	{
 		if (fromCounter.find(iter.first) == fromCounter.end())
 		{
 			fromCounter[iter.first] = 1.0;
 		}
+		iter.second.first = 1.0 / website.size();
 	}
 	for (int i = 0; i < p-1; i++)
 	{
@@ -104,11 +98,7 @@ void graph::updateRank()
 			}
 			double currRank = iter.second.first;
 			double result = currRank * sum;
-			cout << "b4: " << iter.second.first << endl;
 			iter.second.first = result;
-			//at the end of every iteration, this resets back to OG value, can't get result to "stick"
-			cout << "after: " << iter.second.first << endl;
-
 		}
 	}
 

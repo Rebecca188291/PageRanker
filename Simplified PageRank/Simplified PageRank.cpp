@@ -5,7 +5,15 @@ using namespace std;
 
 int main()
 {
-	graph Test(7, 2);
+	string numCommands;
+	getline(cin, numCommands);
+	for (int i = 0; i < numCommands.length(); i++)
+	{
+
+	}
+
+
+	graph Test(2);
 	Test.insert("google.com", "gmail.com");
 	Test.insert("google.com", "maps.com");
 	Test.insert("facebook.com", "ufl.edu");

@@ -16,9 +16,8 @@ private:
 	map<string, double> fromCounter;
 
 public:
-	graph(int Size, int P)
+	graph(int P)
 	{
-		size = Size;
 		p = P;
 	}
 	void insert(string from, string to); 
