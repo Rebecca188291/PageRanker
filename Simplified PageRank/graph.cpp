@@ -15,7 +15,7 @@ void graph::insert(string from, string to)
 		if (website.find(from) == website.end())
 		{
 			vector<string> linkingTo;
-			linkingTo.push_back(to);
+			//nkingTo.push_back(to);
 			pair<double, vector<string>> pair2;
 			pair2.first = 1.0/size;
 			pair2.second = linkingTo;
@@ -33,7 +33,7 @@ void graph::insert(string from, string to)
 		if (website.find(from) == website.end())
 		{
 			vector<string> linkingTo;
-			linkingTo.push_back(to);
+			//linkingTo.push_back(to);
 			pair<double, vector<string>> pair2;
 			pair2.first = 1.0/size;
 			pair2.second = linkingTo;
@@ -61,6 +61,12 @@ void graph::printPR()
 		pair1.second = iter.second.first;
 		pair1.first = iter.first;
 		finalList.push_back(pair1);
+		cout << iter.first << ": ";
+		for (int j = 0; j < iter.second.second.size(); j++)
+		{
+			cout << iter.second.second[j]<< " ";
+		}
+		cout << endl;
 	}
 	sort(finalList.begin(), finalList.end()); //sorts based on the name
 	for (int i = 0; i < finalList.size(); i++)
@@ -84,9 +90,10 @@ void graph::updateRank()
 			fromCounter[iter.first] = 1.0;
 		}
 	}
-	for (int i = 0; i < p; i++)
+	for (int i = 0; i < p-1; i++)
 	{
-		for (auto iter : website)
+
+		for (auto &iter : website)
 		{
 			double sum = 0.0;
 			//for every website, calculate all the out degrees of what is pointing to it
@@ -97,9 +104,10 @@ void graph::updateRank()
 			}
 			double currRank = iter.second.first;
 			double result = currRank * sum;
+			cout << "b4: " << iter.second.first << endl;
 			iter.second.first = result;
 			//at the end of every iteration, this resets back to OG value, can't get result to "stick"
-			cout << iter.second.first << endl;
+			cout << "after: " << iter.second.first << endl;
 
 		}
 	}
